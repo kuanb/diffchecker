@@ -157,6 +157,46 @@ body {
   background: var(--bg);
 }
 
+.diff-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 10px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.view-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.toggle-btn {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.toggle-btn + .toggle-btn {
+  border-left: 1px solid var(--border);
+}
+
+.toggle-btn:hover {
+  background: var(--surface);
+}
+
+.toggle-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
 .diff {
   font-family: var(--mono);
   font-size: 12px;
@@ -178,6 +218,12 @@ body {
   background: var(--remove-bg);
 }
 
+.diff-srow {
+  display: grid;
+  grid-template-columns: 50px 20px 1fr 50px 20px 1fr;
+  border-bottom: 0;
+}
+
 .diff-gutter {
   text-align: right;
   padding: 0 10px;
@@ -187,12 +233,14 @@ body {
   border-right: 1px solid var(--border);
 }
 
-.diff-row.add .diff-gutter {
+.diff-row.add .diff-gutter,
+.diff-srow .diff-gutter.add {
   background: var(--add-gutter);
   color: var(--add-text);
 }
 
-.diff-row.remove .diff-gutter {
+.diff-row.remove .diff-gutter,
+.diff-srow .diff-gutter.remove {
   background: var(--remove-gutter);
   color: var(--remove-text);
 }
@@ -203,12 +251,16 @@ body {
   color: var(--muted);
 }
 
-.diff-row.add .diff-marker {
+.diff-row.add .diff-marker,
+.diff-srow .diff-marker.add {
   color: var(--add-text);
+  background: var(--add-bg);
 }
 
-.diff-row.remove .diff-marker {
+.diff-row.remove .diff-marker,
+.diff-srow .diff-marker.remove {
   color: var(--remove-text);
+  background: var(--remove-bg);
 }
 
 .diff-content {
@@ -216,6 +268,23 @@ body {
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+
+.diff-srow .diff-content.add {
+  background: var(--add-bg);
+}
+
+.diff-srow .diff-content.remove {
+  background: var(--remove-bg);
+}
+
+.diff-srow .diff-content.empty,
+.diff-srow .diff-marker.empty {
+  background: var(--gutter-bg);
+}
+
+.diff-srow .diff-gutter.empty {
+  background: var(--gutter-bg);
 }
 
 .diff-empty {

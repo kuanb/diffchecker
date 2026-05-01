@@ -5,6 +5,7 @@ export default function App() {
   const [left, setLeft] = useState('');
   const [right, setRight] = useState('');
   const [showDiff, setShowDiff] = useState(false);
+  const [viewMode, setViewMode] = useState('split');
 
   const handleCompare = () => setShowDiff(true);
 
@@ -46,7 +47,27 @@ export default function App() {
         </main>
       ) : (
         <main className="diff-wrapper">
-          <DiffView left={left} right={right} />
+          <div className="diff-toolbar">
+            <div className="view-toggle" role="tablist" aria-label="Diff view">
+              <button
+                role="tab"
+                aria-selected={viewMode === 'split'}
+                className={`toggle-btn ${viewMode === 'split' ? 'active' : ''}`}
+                onClick={() => setViewMode('split')}
+              >
+                Side by side
+              </button>
+              <button
+                role="tab"
+                aria-selected={viewMode === 'unified'}
+                className={`toggle-btn ${viewMode === 'unified' ? 'active' : ''}`}
+                onClick={() => setViewMode('unified')}
+              >
+                Stacked
+              </button>
+            </div>
+          </div>
+          <DiffView left={left} right={right} mode={viewMode} />
         </main>
       )}
 

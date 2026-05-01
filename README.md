@@ -30,10 +30,10 @@ The production build is emitted to `dist/`. The Vite `base` is set to `/diffchec
 
 ## Deploy
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the app and publishes `dist/` to the `gh-pages` branch via [`peaceiris/actions-gh-pages`](https://github.com/peaceiris/actions-gh-pages).
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the app and deploys it via the official GitHub Pages actions (`actions/upload-pages-artifact` + `actions/deploy-pages`).
 
-After the first successful run:
+One-time repo setup:
 
 1. Go to repo **Settings -> Pages**.
-2. Set **Source** to `Deploy from a branch`, branch `gh-pages`, folder `/ (root)`.
-3. Site goes live at `https://<user>.github.io/diffchecker/`.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. Push to `main`; site goes live at `https://<user>.github.io/diffchecker/`.
