@@ -1,11 +1,25 @@
 import { useState } from 'react';
 import DiffView from './DiffView.jsx';
+import { useTheme } from './useTheme.js';
+
+const THEME_LABEL = {
+  system: 'System',
+  light: 'Light',
+  dark: 'Dark',
+};
+
+const THEME_ICON = {
+  system: '\u25D1',
+  light: '\u2600',
+  dark: '\u263E',
+};
 
 export default function App() {
   const [left, setLeft] = useState('');
   const [right, setRight] = useState('');
   const [showDiff, setShowDiff] = useState(false);
   const [viewMode, setViewMode] = useState('split');
+  const { preference: themePref, cycle: cycleTheme } = useTheme();
 
   const handleCompare = () => setShowDiff(true);
 
@@ -17,6 +31,16 @@ export default function App() {
 
   return (
     <div className="app">
+      <button
+        type="button"
+        className="theme-toggle"
+        onClick={cycleTheme}
+        title={`Theme: ${THEME_LABEL[themePref]} (click to change)`}
+        aria-label={`Theme: ${THEME_LABEL[themePref]}`}
+      >
+        <span className="theme-icon" aria-hidden="true">{THEME_ICON[themePref]}</span>
+        <span className="theme-label">{THEME_LABEL[themePref]}</span>
+      </button>
       <header className="header">
         <h1>Diffchecker</h1>
         <p className="subtitle">Find the difference between two text blocks</p>

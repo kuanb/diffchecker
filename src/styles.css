@@ -1,9 +1,11 @@
-:root {
+:root,
+:root[data-theme="light"] {
   --bg: #ffffff;
   --fg: #1f2328;
   --muted: #656d76;
   --border: #d0d7de;
   --surface: #f6f8fa;
+  --surface-2: #eef1f4;
   --accent: #0969da;
   --accent-hover: #0860c7;
   --add-bg: #e6ffec;
@@ -14,7 +16,28 @@
   --remove-text: #cf222e;
   --gutter-bg: #f6f8fa;
   --gutter-fg: #8c959f;
+  --toolbar-bg: rgba(255, 255, 255, 0.95);
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0d1117;
+  --fg: #e6edf3;
+  --muted: #7d8590;
+  --border: #30363d;
+  --surface: #161b22;
+  --surface-2: #21262d;
+  --accent: #2f81f7;
+  --accent-hover: #1f6feb;
+  --add-bg: #033a16;
+  --add-gutter: #0a4a1f;
+  --add-text: #56d364;
+  --remove-bg: #4d1213;
+  --remove-gutter: #5a191b;
+  --remove-text: #f85149;
+  --gutter-bg: #161b22;
+  --gutter-fg: #6e7681;
+  --toolbar-bg: rgba(13, 17, 23, 0.95);
 }
 
 * {
@@ -41,6 +64,41 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: 24px 24px 96px;
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-2);
+}
+
+.theme-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+@media (max-width: 720px) {
+  .theme-label {
+    display: none;
+  }
 }
 
 .header {
@@ -111,7 +169,7 @@ body {
   justify-content: center;
   gap: 12px;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--toolbar-bg);
   border-top: 1px solid var(--border);
   backdrop-filter: blur(6px);
 }
@@ -130,7 +188,7 @@ body {
 }
 
 .btn:hover {
-  background: #eef1f4;
+  background: var(--surface-2);
 }
 
 .btn-primary {
