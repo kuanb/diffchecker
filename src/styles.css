@@ -1,0 +1,236 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1f2328;
+  --muted: #656d76;
+  --border: #d0d7de;
+  --surface: #f6f8fa;
+  --accent: #0969da;
+  --accent-hover: #0860c7;
+  --add-bg: #e6ffec;
+  --add-gutter: #ccffd8;
+  --add-text: #1a7f37;
+  --remove-bg: #ffebe9;
+  --remove-gutter: #ffd7d5;
+  --remove-text: #cf222e;
+  --gutter-bg: #f6f8fa;
+  --gutter-fg: #8c959f;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 24px 96px;
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.header h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.pane-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.textarea {
+  flex: 1;
+  width: 100%;
+  resize: vertical;
+  min-height: 400px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--fg);
+  outline: none;
+}
+
+.textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.2);
+}
+
+.toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+}
+
+.btn {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.btn:hover {
+  background: #eef1f4;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+}
+
+.diff-wrapper {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.diff {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.diff-row {
+  display: grid;
+  grid-template-columns: 50px 50px 20px 1fr;
+}
+
+.diff-row.add {
+  background: var(--add-bg);
+}
+
+.diff-row.remove {
+  background: var(--remove-bg);
+}
+
+.diff-gutter {
+  text-align: right;
+  padding: 0 10px;
+  color: var(--gutter-fg);
+  background: var(--gutter-bg);
+  user-select: none;
+  border-right: 1px solid var(--border);
+}
+
+.diff-row.add .diff-gutter {
+  background: var(--add-gutter);
+  color: var(--add-text);
+}
+
+.diff-row.remove .diff-gutter {
+  background: var(--remove-gutter);
+  color: var(--remove-text);
+}
+
+.diff-marker {
+  text-align: center;
+  user-select: none;
+  color: var(--muted);
+}
+
+.diff-row.add .diff-marker {
+  color: var(--add-text);
+}
+
+.diff-row.remove .diff-marker {
+  color: var(--remove-text);
+}
+
+.diff-content {
+  padding: 0 8px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.diff-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 720px) {
+  .panes {
+    grid-template-columns: 1fr;
+  }
+
+  .diff-row {
+    grid-template-columns: 36px 36px 18px 1fr;
+  }
+}
